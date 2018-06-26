@@ -1,0 +1,75 @@
+<div class="sidebar">
+  <app-sidebar-header></app-sidebar-header>
+  <app-sidebar-form></app-sidebar-form>
+  <nav class="sidebar-nav">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i> Dashboard <span class="badge badge-info">NEW</span></a>
+      </li>
+      <li class="divider"></li>
+      <li class="nav-title">
+        Article elements
+      </li>
+      <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+        <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="icon-pencil"></i> Article</a>
+        <ul class="nav-dropdown-items">
+
+          
+         
+       
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/article-view']"><i class="icon-eyeglass"></i> View article</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/article-write']"><i class="icon-pencil"></i> Write article</a>
+          </li>
+          
+
+        </ul>
+      </li>
+        <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="icon-pencil"></i> Category</a>
+          <ul class="nav-dropdown-items">
+           
+            <li class="nav-item"  *ngFor="let cat of this.category_array.category let i = index;" >
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/view/:cat']"><i class="icon-eyeglass"></i>{{cat.name}}</a>
+            </li>
+            
+           
+  
+          </ul>
+         </li>
+       
+         <!-- end of category dropdown -->
+       
+       <li class="divider">
+        
+       </li>
+       <li class="nav-title">
+         Testimony elements
+       </li>
+       <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+        <a class="nav-link nav-dropdown-toggle"  appNavDropdownToggle><i class="icon-pencil"></i> Testimonies</a>
+        <ul class="nav-dropdown-items">
+          
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/testimony/testimonies']"><i class="icon-pencil"></i>All Testimonies</a>
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/testimony/disapproved']"><i class="icon-dislike"></i>Disapproved Tes..</a>
+            
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/testimony/approved']"><i class="icon-like"></i>Approved Tes..</a>
+              
+            </li>
+         
+        </ul>
+       </li>
+      <li class="nav-item">
+         </li>
+    </ul>
+  </nav>
+  <app-sidebar-footer></app-sidebar-footer>
+</div>
