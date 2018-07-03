@@ -32,7 +32,7 @@
           <ul class="nav-dropdown-items">
            
             <li class="nav-item"  *ngFor="let cat of this.category_array.category let i = index;" >
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/view/:cat']"><i class="icon-eyeglass"></i>{{cat.name}}</a>
+              <a class="nav-link" routerLinkActive="active" (click)="onmth(cat.id)"><i class="icon-eyeglass"></i>{{cat.name}}</a>
             </li>
             
            
@@ -66,7 +66,14 @@
             </li>
          
         </ul>
+
        </li>
+       <li class="nav-title">
+        adminstration elements
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/roles']"><i class="icon-star"></i> Roles And Permission</a>
+      </li>
       <li class="nav-item">
          </li>
     </ul>

@@ -52,7 +52,11 @@ export const routes: Routes = [
         path: 'testimony',
         loadChildren: './views/testimony/testimony.module#TestimonyModule'
       },
-     
+      
+      {
+        path: 'roles',
+        loadChildren: './views/role_and_permission/roles.module#RoleModule'
+      }
 
     ]
   },

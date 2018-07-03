@@ -9,7 +9,7 @@ import { Article } from '../article.interface';
   
 })
 export class CategoryViewComponent implements OnInit {
-  public id:any;
+  public id:any = 1;
   public article = new Article();
 
   constructor(private route: ActivatedRoute, private categoryservice: CategoryService ) { }
@@ -19,17 +19,9 @@ export class CategoryViewComponent implements OnInit {
     this.route.params.subscribe(params => {
       console.log(params)
     });
-    // // this.GetCategory(params);
-    // this.categoryservice.getCategory(this.id).subscribe(
-    //  data => {
-    //  // this.category_array = data;
-    //    this.setData(data);
-    //    console.log("data " , this.article);
-    //    //this.categories = data; 
-       
-    //  });
-
-    // )
+    
+    
+    
   }
 
   public setData(data){

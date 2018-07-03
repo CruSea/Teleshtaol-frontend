@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-
+import { FilterPipe } from './filter.pipe';
 
 
 // Components Routing
@@ -31,7 +31,7 @@ import { ApprovedComponent } from './approved.component';
     HttpClientModule,
     // PopupModule.forRoot()
   ],
-  declarations: [TestimonyComponent, DisapprovedComponent, ApprovedComponent],
+  declarations: [TestimonyComponent, DisapprovedComponent, ApprovedComponent,  FilterPipe ],
   providers:[ApprovedService, DisapprovedService, TestimonyService, AuthService, HttpService]
 })
 export class TestimonyModule { }
