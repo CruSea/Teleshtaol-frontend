@@ -1,3 +1,31 @@
-<p>
-  category-view works!
-</p>
+
+ <h2>category of {{article.category.name}}</h2>
+<br>
+ <div *ngFor="let article of this.article.article ">
+           
+    <div class="card">
+        
+   <div class="card-header"> <h4>{{article.title}}</h4> 
+    <code> {{article.category.name}}</code>  
+   <small>created by: {{article.user.name}}</small>
+   
+   </div>
+   <h4 class="card-title mb-0"></h4>
+   <div class="small text-muted">{{article.created_at}}</div>
+   <div class="card-body">
+   
+       <div class="row text-center">
+   
+         <br>
+          
+       {{article.body}} <br>
+   
+      
+         
+       
+   </div></div>
+   <div class="card-footer">
+         <code class="pull-left">to edit 
+             <a [routerLink]="['/components/article-view']"> click here</a></code>
+       </div></div>
+   

@@ -88,8 +88,8 @@ export class RoleComponent implements OnInit {
     }
     
   }
-  // viewPermission(role){
-    // this.rolenew = role;
-    // this.roleservice.viewRolePermission(role.name).subscribe(res => this.pernew = res);
-  // }
+  viewPermission(role){
+    this.rolenew = role;
+    this.roleservice.viewRolePermission(role.name).subscribe(res => this.pernew = res);
+  }
 }

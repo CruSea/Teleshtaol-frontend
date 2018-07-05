@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './app-sidebar.component.html'
 })
 export class AppSidebar {
-
+  public id:number;
   public category_array = new CategoryArray();
   constructor(private el: ElementRef, private categoryservice: CategoryService, private router: Router) { }
 
@@ -19,7 +19,7 @@ export class AppSidebar {
       data => {
       // this.category_array = data;
         this.setData(data);
-        console.log("data " , this.category_array);
+        // console.log("data " , this.category_array);
         //this.categories = data; 
         
       });
@@ -45,15 +45,16 @@ public GetCategories() {
  public onmth(id){
    this.router.navigate(['/components/view/' + id])
    console.log(id);
+   this.id =id;
    
-   this.categoryservice.getCategory(id).subscribe(
-     data => {
-     // this.category_array = data;
-       this.setData(data);
-       console.log("data " , this.category_array);
-       //this.categories = data; 
+  //  this.categoryservice.getCategory(this.id).subscribe(
+  //    data => {
+  //    // this.category_array = data;
+
+  //      console.log(data);
+  //      //this.categories = data; 
        
-     });
+  //    });
  }
 }
 

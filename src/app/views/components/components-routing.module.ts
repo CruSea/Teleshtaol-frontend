@@ -37,7 +37,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'view/:category',
+        path: 'view/:id',
         component: CategoryViewComponent,
         data: {
           title: 'View category'

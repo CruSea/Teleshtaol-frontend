@@ -27,7 +27,7 @@ public category_array = new CategoryArray();
       //this.categories = data; 
       
     });
-
+ 
    
   //  console.log(this.GetCategories());
   }

@@ -26,7 +26,8 @@ export class CategoryService {
     const token = this.authservice.getUserToken();
     return this.http.sendGetRequest('category' + '?token=' + token);
   }
-  public getCategory(id) {
+
+  public getCategory(id: number) {
     const token = this.authservice.getUserToken();
     return this.http.sendGetRequest('category/' + id + '?token=' + token);
   }

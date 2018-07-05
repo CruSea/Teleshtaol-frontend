@@ -3,7 +3,8 @@ import {Article, ArticlesPaginator} from "./article.interface";
 import {ArticleService} from "./services/article.service";
 import {NgForm} from "@angular/forms";
 import swal from "sweetalert2";
-
+import { CategoryService } from "../components/category/services/category.service";
+import { CategoryArray, Category } from "../components/category/category.interface";
 @Component({
   selector: 'app-article-view',
   templateUrl: './article-view.component.html',
@@ -14,8 +15,8 @@ export class ArticleViewComponent implements OnInit {
   public articles = new  Article();
   public articlenew = new Article();
   public article_list_paginator = new ArticlesPaginator();
-
-  constructor(private articleservice: ArticleService) {
+  public category_array = new CategoryArray();
+  constructor(private articleservice: ArticleService, private categoryservice: CategoryService) {
   }
 
 // get contact list when page loads
@@ -25,7 +26,16 @@ export class ArticleViewComponent implements OnInit {
       data => {
         this.article_list_paginator = data
       });
-     
+      this.categoryservice.getCategories().subscribe(
+        data => {
+        // this.category_array = data;
+              this.setData(data);
+              console.log (data);
+          // console.log("data " , this.category_array);
+          //this.categories = data; 
+          
+          
+        });
      
   }
 
@@ -62,10 +72,12 @@ export class ArticleViewComponent implements OnInit {
   // pre-populate existing data on edit button
   public  onedit(articles) {
     this.articlenew = articles;
+    
   }
 
 // update contact information
   public  onupdate(form: NgForm) {
+   
     console.log(this.articlenew.id, this.articlenew);
     this.articleservice.updateArticle(this.articlenew.id, form.value.title, form.value.body, form.value.category).subscribe(
       () => {
@@ -77,7 +89,9 @@ export class ArticleViewComponent implements OnInit {
         'success'
       )
   }
-
+  public setData(data){
+    this.category_array = data;
+}
 // delete contact information
   public  ondelete() {
     swal({

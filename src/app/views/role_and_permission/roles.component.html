@@ -152,7 +152,6 @@
                     </div>
                   </div>
             <!--submit button-->
-    
                   <!--<button type="submit" (click)="addFile()" class="btn btn-primary">Upload</button>-->
          </form>
     
@@ -246,7 +245,7 @@
                     </div> -->
                           <select multiple class="form-control" #per="ngModel" id="permission" [(ngModel)]="rolepers.permission" name="permission" required>
                               <!-- <option *ngIf="!roles" value="no">no</option> -->
-                         <option *ngFor="let permission of permissions" value="{{permission.name}}">{{permission.name}}</option>
+                         <option *ngFor="let permission of permissions" value="{{permission.id}}">{{permission.name}}</option>
                            
                        </select>
                   </div>
