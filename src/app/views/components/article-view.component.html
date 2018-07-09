@@ -194,7 +194,7 @@
                   <!-- <input  class="form-control"  #art="ngModel" id="category"  [(ngModel)]="articlenew.category_id" name="category" required> -->
 
                   <select  class="form-control"  #art="ngModel" id="category"  [(ngModel)]="articlenew.category_id" name="category" required>
-                      <option *ngFor="let cat of this.category_array.category let i = index;" value="{{i+1}}">{{cat.name}}</option>
+                      <option *ngFor="let cat of this.category_array.category let i = index;" value="{{cat.id}}">{{cat.name}}</option>
                       <!-- <option value="2">Marrige</option>
                       <option value="3">Health</option> -->
                     </select>

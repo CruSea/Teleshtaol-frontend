@@ -34,7 +34,10 @@
             <li class="nav-item"  *ngFor="let cat of this.category_array.category let i = index;" >
               <a class="nav-link" routerLinkActive="active" (click)="onmth(cat.id)"><i class="icon-eyeglass"></i>{{cat.name}}</a>
             </li>
-            
+            <li class="nav-item">
+              <a class="nav-item" routerLinkActive="active" (click)="component/Category">Create new</a>
+
+            </li>
            
   
           </ul>

@@ -30,13 +30,13 @@ export class ArticleViewComponent implements OnInit {
         data => {
         // this.category_array = data;
               this.setData(data);
-              console.log (data);
+              
           // console.log("data " , this.category_array);
           //this.categories = data; 
           
           
         });
-     
+      
   }
 
   public UpdatepagePaginator() {

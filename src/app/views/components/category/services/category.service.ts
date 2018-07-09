@@ -21,7 +21,11 @@ export class CategoryService {
   //       } else{
   //         console.log(' error has Occured!!!');
   //       }}
-
+  public addcategory(name: string) {
+    const token = this.authservice.getUserToken();
+    return this.http.sendPostRequest('category?token=' + token, {name: name} ,
+      { headers : new HttpHeaders ({'Content-Type': 'application/json' }) }); }
+      
     public getCategories() {
     const token = this.authservice.getUserToken();
     return this.http.sendGetRequest('category' + '?token=' + token);

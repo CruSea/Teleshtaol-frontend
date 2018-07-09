@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CategoryService } from './services/category.service';
 import { Article } from '../article.interface';
-
+import { Category } from '../category/category.interface';
 @Component({
   selector: 'app-category-view',
   templateUrl: './category-view.component.html',

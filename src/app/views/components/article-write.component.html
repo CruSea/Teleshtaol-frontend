@@ -2,6 +2,9 @@
 <div class="card-body">
     <div class="card-header">
         <strong>Create Article</strong> Elements
+         <button type="button" class="btn btn-primary" class="btn btn-warning pull-right " data-toggle="modal" (click)="primaryModal.show()">
+          New Category
+        </button>
       </div>
 <form  (ngSubmit)="onSubmit(f)" #f="ngForm" enctype="multipart/form-data" method="post">
   
@@ -24,9 +27,8 @@
                     <!-- <input type="number" class="form-control"  #art="ngModel" id="category" placeholder="Input category here" [(ngModel)]="category" name="category" required>  -->
                     
                         <select id="select" class="form-control"  #art="ngModel" id="category" placeholder="Input category here" [(ngModel)]="category" name="category" required>
-                          <option value="1">Addiction</option>
-                          <option value="2">Marrige</option>
-                          <option value="3">Health</option>
+                          <option *ngFor="let cat of this.category_array.category let i = index;"
+                           value="{{cat.id}}">{{cat.name}}</option>
                         </select>
                       </div>
                     </div>
@@ -39,7 +41,43 @@
                    -->
                 <!--</div>-->
                 <!--submit button-->
-  
                 <!--<button type="submit" (click)="addFile()" class="btn btn-primary">Upload</button>-->
               </form>
-            </div></div>
+            </div>
+         
+
+
+
+
+
+
+           
+              <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-primary" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">create category</h4>
+                        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form  (ngSubmit)="onCreate(f)" #f="ngForm" enctype="multipart/form-data" method="post">
+                          
+                            
+                            <input type="name" rows="3" class="form-control"  #art="ngModel" id="name" placeholder="Input name here" [(ngModel)]="name" name="name" required>
+                            
+                            
+                         
+                      
+                      <div class="modal-footer">
+                        <button type="button"  class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+                        <button type="submit" class="btn btn-primary" (click)="primaryModal.hide()">Save Name</button>
+                      </div> 
+                    </form>
+                    </div>
+                    <!-- //.modal-content --> 
+                  <!-- </div>/.modal-dialog -->
+                <!-- </div>/.modal -->
+                
+          
