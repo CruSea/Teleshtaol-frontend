@@ -15,10 +15,14 @@ export class ArticleService {
   public Articlelistpaginator = new EventEmitter<ArticlesPaginator>();
   constructor(private http: HttpService, private authservice: AuthService) { }
 // nntact list services handled here
-  public addarticle(title: string, body: string, category: number) {
-    const token = this.authservice.getUserToken();
-    return this.http.sendPostRequest('article?token=' + token, {title: title, body:body, category:category} ,
-      { headers : new HttpHeaders ({'Content-Type': 'application/json' }) }); }
+
+ public addarticle(title: string, body: string, category: number)
+  {
+      const token = this.authservice.getUserToken();
+        return this.http.sendPostRequest('article?token=' + token, {title: title, body:body, category:category} ,
+         { headers : new HttpHeaders ({'Content-Type': 'application/json' }) }); 
+  }
+  
   // upload(fileToUpload: any) {
   //       const input = new FormData();
   //       input.append('file', fileToUpload);

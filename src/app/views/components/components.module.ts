@@ -1,7 +1,4 @@
 import { NgModule } from '@angular/core';
-
-
-
 // Components Routing
 import { ComponentsRoutingModule } from './components-routing.module';
 import { ArticleViewComponent } from './article-view.component';

@@ -44,8 +44,8 @@ public GetCategories() {
  }
  public onmth(id){
    this.router.navigate(['/components/view/' + id])
-   console.log(id);
-   this.id =id;
+  //  console.log(id);
+   this.id = id;
    
   //  this.categoryservice.getCategory(this.id).subscribe(
   //    data => {

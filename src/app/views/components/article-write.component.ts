@@ -23,7 +23,7 @@ export class ArticleWriteComponent implements OnInit {
         // console.log("data " , this.category_array);
         //this.categories = data; 
         
-        
+      
       });
  
   }

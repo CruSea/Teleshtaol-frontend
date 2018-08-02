@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CategoryService {
+   token = this.authservice.getUserToken();
   // public categories;
   // public CategoryList= new EventEmitter<Category>();
   constructor(private http: HttpService, private authservice: AuthService) { }
@@ -23,17 +24,17 @@ export class CategoryService {
   //       }}
   public addcategory(name: string) {
     const token = this.authservice.getUserToken();
-    return this.http.sendPostRequest('category?token=' + token, {name: name} ,
+    return this.http.sendPostRequest('category?token=' + this.token, {name: name} ,
       { headers : new HttpHeaders ({'Content-Type': 'application/json' }) }); }
       
     public getCategories() {
-    const token = this.authservice.getUserToken();
-    return this.http.sendGetRequest('category' + '?token=' + token);
+   
+    return this.http.sendGetRequest('category' + '?token=' + this.token);
   }
 
   public getCategory(id: number) {
-    const token = this.authservice.getUserToken();
-    return this.http.sendGetRequest('category/' + id + '?token=' + token);
+    
+    return this.http.sendGetRequest('category/' + id + '?token=' + this.token);
   }
 
   }

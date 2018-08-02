@@ -1,11 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-
-
-
 import { AppComponent } from './app.component';
-
 // Import containers
 import {
   FullLayout,
@@ -78,7 +74,8 @@ import {LoginRoutingModule} from "./views/login/login-routing.module";
 import { HttpService } from 'app/http.service';
 import { TestimonyComponent } from './views/testimony/testimony.component';
 import { UsersComponent } from './views/users/users.component';
-
+import { AuthGuard } from './auth.guard';
+// import { AdminGuard } from './admin.guard';
 // import { TestimonyComponent } from './views/testimony/testimony.component';
 
 
@@ -106,21 +103,13 @@ import { UsersComponent } from './views/users/users.component';
     ...APP_DIRECTIVES,
     UsersComponent,
     
-   
-    // TestimonyComponent,
-
-
-
-
-
-
 
   ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy,
 
-  },  AuthService, HttpService],
+  },  AuthService, HttpService,  AuthGuard],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

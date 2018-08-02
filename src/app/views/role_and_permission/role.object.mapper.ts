@@ -97,5 +97,18 @@ export class RolePer{
     this.role = '';
     this.permission = '';
     }
-
 }
+
+
+export class User {
+    public id: number; 
+    public name: string;
+    public email: any;
+    constructor(){
+      this.id = null;
+      this.name = '';
+      this.email = '';
+    }
+    
+  
+  }

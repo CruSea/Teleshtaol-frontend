@@ -34,8 +34,9 @@ export class Article {
   public body: string;
   public created_at: string;
   public updated_at: string;
-  public category_id: number;
+  public category_id: '';
   public user_id: number;
+  public category: Category[];
   // 
   public cover_image: string;
   constructor() {

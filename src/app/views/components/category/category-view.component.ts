@@ -11,6 +11,7 @@ import { Category } from '../category/category.interface';
 export class CategoryViewComponent implements OnInit {
   public id:any;
   public article = new Article();
+  public category = new Category();
 
   constructor(private route: ActivatedRoute, private categoryservice: CategoryService ) { }
 

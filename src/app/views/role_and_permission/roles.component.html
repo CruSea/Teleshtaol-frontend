@@ -108,6 +108,39 @@
       <!--/.col-->
     </div>
     </div>
+<!-- assign role to users  -->
+     <div class="row">
+      <div class="col-lg-12  pull-center ">
+        <div class="card">
+
+
+
+              <div class="card-header">
+                  <h5> <i class="fa fa-align-justify"></i> assign role to users</h5>
+              </div>
+              <div class="card-body">
+        <form  (ngSubmit)="onSet(f)" #f="ngForm" enctype="multipart/form-data" method="post">
+                    <label >Role</label>
+                     <select id="select" class="form-control"  #art="ngModel" id="role" placeholder="Input category here" [(ngModel)]="role" name="role" required>
+          <option *ngFor="let role of roles.data" value="{{role.name}}">{{role.id}}. {{role.name}}</option>  
+                  </select>  
+                  <br>   <label >user</label>    
+          <select id="select" class="form-control"  #art="ngModel" id="email" placeholder="Input category here" [(ngModel)]="email" name="email" required>
+              <option *ngFor="let user of user.users" value="{{user.email}}">{{user.name}}--{{user.email}}</option>
+                 </select>  <br>
+         
+                
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-sm btn-primary"  [disabled] ="f.valid"><i class="fa fa-dot-circle-o"></i> Assign</button>
+                    
+                  </div>
+         </form>
+    
+    
+
+
+
+
     <!-- new role form  -->
     <div bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-primary" role="document">

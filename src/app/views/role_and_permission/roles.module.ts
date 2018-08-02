@@ -10,7 +10,8 @@ import { RoleRoutingModule } from 'app/views/role_and_permission/roles-routing.m
 import { RoleComponent } from 'app/views/role_and_permission/roles.component';
 import { RoleService } from 'app/views/role_and_permission/role.service';
 import { FilterPipe } from 'app/views/role_and_permission/filter.pipe';
-
+import { AuthService } from './../../auth.service';
+import { HttpService } from '../../http.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { FilterPipe } from 'app/views/role_and_permission/filter.pipe';
     FormsModule
   ],
   declarations: [ RoleComponent, FilterPipe ],
-  providers: [RoleService],
+  providers: [RoleService, AuthService, HttpService],
   exports: [
     ModalModule
 ]

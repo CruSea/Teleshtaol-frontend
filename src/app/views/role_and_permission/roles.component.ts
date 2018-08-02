@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Role, RolesPaginator, RolePer, PermissionsPaginator, Permission } from 'app/views/role_and_permission/Role.object.mapper';
+import { Role, RolesPaginator, RolePer, PermissionsPaginator, Permission, User } from 'app/views/role_and_permission/Role.object.mapper';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { RoleService } from 'app/views/role_and_permission/role.service';
 import { AuthService } from 'app/auth.service';
-
+import  swal from "sweetalert2";
 @Component({
   templateUrl: 'roles.component.html'
 })
@@ -15,22 +15,38 @@ export class RoleComponent implements OnInit {
   permissions: Permission;
   rolepers = new RolePer();
   roleper = new RolePer();
+  user = new User();
   permissionsPaginator = new PermissionsPaginator();
 
   token = this.auth.getUserToken();
   // form: NgForm;
   // roleperArray: RolePer[] = this.form.controls['permission'].value;
-
+  public total = '';
   constructor(private roleservice: RoleService, private auth: AuthService, private router: Router ) { }
 
   ngOnInit(){
     if(this.token){
+      
+
       this.UpdatepagePaginator();
       this.UpdatePerPaginator();
     }
-    else{ this.router.navigate(['/login']); }
-    
+    else
+    { this.router.navigate(['/login']); }
+    this.roleservice.getusers().subscribe(
+  data => {
+    // this.category_array = data;
+      this.setData(data);
+      console.log("data " , this.user);
+      //this.categories = data; 
+      
+    });
   }
+  
+
+public setData(data){
+this.user = data;
+}
   onSubmit(){
     this.roleservice.addRole(this.rolenew).subscribe(
     response => { this.UpdatepagePaginator()} );
@@ -43,6 +59,7 @@ export class RoleComponent implements OnInit {
   UpdatepagePaginator(){
     this.roleservice.getRoles().subscribe(res => this.roles = res);
     this.roleservice.getPermissions().subscribe(res => this.permissions = res);
+    
   }
   UpdatePerPaginator(){
     this.roleservice.getPaginatedPermissions().subscribe(res => this.permissionsPaginator = res);
@@ -88,8 +105,24 @@ export class RoleComponent implements OnInit {
     }
     
   }
+  onSet(form: NgForm) {
+
+    swal('new assigned','','success')
+    // this.articles.body = form.value.body;
+    // this.articles.title = form.value.title;
+    console.log (form.value.name)
+    
+    this.roleservice.roleAssign(form.value.name, form.value.email).subscribe(
+      data => {
+      });
+     form.reset();
+
+  }
   viewPermission(role){
     this.rolenew = role;
     this.roleservice.viewRolePermission(role.name).subscribe(res => this.pernew = res);
   }
+  // getUsers(){
+    
+  // }
 }

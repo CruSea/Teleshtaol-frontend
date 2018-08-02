@@ -1,10 +1,14 @@
 <div class="app flex-row align-items-center">
   <div class="container">
     <div class="row justify-content-center">
+
+        <img src="assets/img/logo.png" class="img-avatar" alt="#"/><br>
+      
       <div class="col-md-6">
-        <div class="card mx-4">
+        <div class="card mx-5">
           <div class="card-body p-4">
-             <h1>Login</h1>
+              
+             <h2>Login</h2>
             <form (ngSubmit)="onSignin(f)" #f="ngForm">
               <div class="input-group mb-3">
                 <span class="input-group-addon">@</span>
@@ -15,7 +19,11 @@
                 <input type="password" ngModel class="form-control" placeholder="Password" name="password">
               </div>
               <button type="submit"[disabled]="!f.valid" class="btn btn-block btn-success"> Login</button>
-            </form>
+            </form> <br>
+            <a href="forgotpassword" class="btn btn-small btn">Forgot password</a><br>
+            <p class="btn btn-small btn">don't have an accout?</p>
+            <br>
+            <button type="submit"[disabled]="!f.valid" class="btn btn-block btn-secondary" data-ng-href="register.php">Create an account</button>
           </div>
         </div>
       </div>
