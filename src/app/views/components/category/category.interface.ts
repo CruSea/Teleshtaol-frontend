@@ -20,7 +20,7 @@ export class Category {
       this.id = null;
       this.name = '';
       this.description = '';
-     
+    
   
     }
   }

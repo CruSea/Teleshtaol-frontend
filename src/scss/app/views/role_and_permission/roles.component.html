@@ -1,0 +1,458 @@
+<div class="animated fadeIn" *ngIf="roles">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5> <i class="fa fa-align-justify"></i> Role Lists</h5>
+                    <button type="button" class="btn btn-info pull-right " data-toggle="modal" (click)="largeModal.show()">
+                        Add Role
+                     </button>
+                     
+                <div class="form-group">
+                  <input class="form-control col-sm-6" [(ngModel)]="term" placeholder="Search roles here..." type="text">
+                </div>
+              </div>
+          <div class="card-body">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Role Name</th>
+                  <th>Date registered</th>
+                  <th>Edit</th>
+                  <th>Assign Permission</th>
+                  <th>View Permission</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  *ngFor="let role of roles.data | filter :term; let i = index ;">
+                    <td>{{i + roles.from }}</td>
+                    <td>{{role.name}}</td>
+                    <td>{{role.created_at}}</td>
+                    <td>
+                        <span class="badge badge-success"><a  data-toggle="modal" (click)="editModal.show(); onedit(role)"><i class="fa fa-edit"></i>&nbsp;Edit</a></span>
+                           </td>
+                    <td>
+                        <span class="badge badge-success"><a  data-toggle="modal" (click)="assignModal.show(); onassignPer(role)">Assign Permission</a></span>
+                           </td>
+                    <td>
+                        <span class="badge badge-success"><a  data-toggle="modal">View Permission</a></span>
+                        <!--<span class="badge badge-success"><a  data-toggle="modal" (click)="viewPermission(role); viewModal.show()">View Permission</a></span>-->
+                           </td>
+                    
+                </tr>
+              </tbody>
+            </table>
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item" *ngIf="roles.prev_page_url"><button class="page-link" (click)="getPaginatedrole(roles.prev_page_url)">Prev</button></li>
+                    <li class="page-item active">
+                        <a class="page-link" >{{roles.current_page + '/' + roles.last_page}}</a>
+                      </li>
+                    <li class="page-item" *ngIf="roles.next_page_url"><button class="page-link" (click)="getPaginatedrole(roles.next_page_url)">Next</button></li>
+                  </ul>
+                </nav>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!-- Permissions  -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5> <i class="fa fa-align-justify"></i>Permissions Lists</h5>
+                     
+                     <button type="button" class="btn btn-info pull-right " data-toggle="modal" (click)="permissionModal.show()">
+                        Add Permission 
+                     </button>
+                <!-- <div class="form-group">
+                  <input class="form-control col-sm-6" [(ngModel)]="term" placeholder="Search roles here..." type="text">
+                </div> -->
+              </div>
+          <div class="card-body">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Permission Name</th>
+                  <th>Date registered</th>
+                  <th>Edit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  *ngFor="let permission of permissionsPaginator.data | filter :term; let i = index ;">
+                    <td>{{i + permissionsPaginator.from }}</td>
+                    <td>{{permission.name}}</td>
+                    <td>{{permission.created_at}}</td>
+                    <td>
+                        <span class="badge badge-success"><a  data-toggle="modal" (click)="editPerModal.show(); oneditPermission(permission)"><i class="fa fa-edit"></i>&nbsp;Edit</a></span>
+                           </td>
+                    
+                </tr>
+              </tbody>
+            </table>
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item" *ngIf="permissionsPaginator.prev_page_url"><button class="page-link" (click)="getPaginatedPer(permissionsPaginator.prev_page_url)">Prev</button></li>
+                    <li class="page-item active">
+                        <a class="page-link" >{{permissionsPaginator.current_page + '/' + permissionsPaginator.last_page}}</a>
+                      </li>
+                    <li class="page-item" *ngIf="permissionsPaginator.next_page_url"><button class="page-link" (click)="getPaginatedPer(permissionsPaginator.next_page_url)">Next</button></li>
+                  </ul>
+                </nav>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    </div>
+<!-- assign role to users  -->
+     <div class="row">
+      <div class="col-lg-12  pull-center ">
+        <div class="card">
+
+
+
+              <div class="card-header">
+                  <h5> <i class="fa fa-align-justify"></i> assign role to users</h5>
+              </div>
+              <div class="card-body">
+        <form  (ngSubmit)="onSet(f)" #f="ngForm" enctype="multipart/form-data" method="post">
+                    <label >Role</label>
+                     <select id="select" class="form-control"  #art="ngModel" id="role" placeholder="Input category here" [(ngModel)]="role" name="role" required>
+          <option *ngFor="let role of roles.data" value="{{role.name}}">{{role.id}}. {{role.name}}</option>  
+                  </select>  
+                  <br>   <label >user</label>    
+          <select id="select" class="form-control"  #art="ngModel" id="email" placeholder="Input category here" [(ngModel)]="email" name="email" required>
+              <option *ngFor="let user of user.users" value="{{user.email}}">{{user.name}}--{{user.email}}</option>
+                 </select>  <br>
+         
+                
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-sm btn-primary"  [disabled] ="f.valid"><i class="fa fa-dot-circle-o"></i> Assign</button>
+                    
+                  </div>
+         </form>
+    
+    
+
+
+
+
+    <!-- new role form  -->
+    <div bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-primary" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Add role</h4>
+              <button type="button" class="close" (click)="largeModal.hide()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+        <div class="modal-body">
+           <div class="col-sm-12">
+    <!--Card in the modal-->
+             <div class="card">
+                 <div class="card-header">
+                    <strong>Role</strong>
+                    <small>Registration FORM</small>
+                  </div>
+          <div class="card-body">
+    <!--Form in the modal-->
+         <form  (ngSubmit)="onSubmit()" #f="ngForm" enctype="multipart/form-data" method="post">
+    
+            
+                 <div class="row">
+                      <label  class="col-sm-9"></label>
+                        <div class="form-group col-sm-11">
+                          <label >Role Name</label>
+                          <input type="text" class="form-control"  #roleName="ngModel" id="rolename" placeholder="Enter Role Name" [(ngModel)]="rolenew.name" name="name" required>
+                        <div *ngIf="!roleName.valid && roleName.dirty">
+                            Role Name Required!
+                        </div>
+                        </div>
+                    <!-- <div class="form-group col-sm-5">
+                          <label for="name">Add role Pic</label>
+                              <input  class="form-control" type="file" name ="name" id="name" [(ngModel)]="name">
+      
+                    </div> -->
+                    </div>
+                    <div class="row">
+                    <div class="form-control ">
+                      <button type="submit"  class="btn btn-primary  btn-sm pull-right" (click)="largeModal.hide()">ADD</button>
+                    </div>
+                  </div>
+            <!--submit button-->
+                  <!--<button type="submit" (click)="addFile()" class="btn btn-primary">Upload</button>-->
+         </form>
+    
+    
+                 </div>
+          </div>
+      </div><!--/.col-->
+    
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <!-- Edit role Form -->
+      <div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Role Edit</h4>
+              <button type="button" class="close" (click)="editModal.hide() " aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <div class="col-sm-12">
+                 <div class="card">
+                        <div class="card-header">
+                          <strong>roles</strong>
+                          <small>Edit FORM</small>
+                        </div>
+                   <div class="card-body">
+     <!--edit modal form-->
+            <form  (ngSubmit)="onupdate(edit)" #edit="ngForm" enctype="multipart/form-data" method="post">
+              <div class="row">
+                <label  class="col-sm-9"></label>
+                  <div class="form-group col-sm-11">
+                    <label >Role Name</label>
+                    <input type="text" class="form-control"  #roleNm="ngModel" id="rolename" placeholder="Enter Role Name" [(ngModel)]="rolenew.name" name="name" required>
+                  <div *ngIf="!roleNm.valid && roleNm.dirty">
+                      Role Name Required!
+                  </div>
+                  </div>
+              <!-- <div class="form-group col-sm-5">
+                    <label for="name">Add role Pic</label>
+                        <input  class="form-control" type="file" name ="name" id="name" [(ngModel)]="name">
+  
+              </div> -->
+              </div>
+              
+                <button type="submit" class="btn btn-primary pull-left" (click)="editModal.hide()" [disabled] ="!edit.valid">Update Info</button>
+            </form>
+                 <button class="btn btn-danger pull-right"  (click)="ondelete(); editModal.hide()">Delete Role</button>
+        
+                   </div>
+            </div>
+        </div><!--/.col-->
+    
+      </div>
+      <div class="modal-footer">
+      </div>
+      </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <div bsModal #assignModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Role Assign</h4>
+              <button type="button" class="close" (click)="assignModal.hide() " aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <div class="col-sm-12">
+                 <div class="card">
+                        <div class="card-header">
+                          <strong>roles</strong>
+                          <small>Assign FORM</small>
+                        </div>
+                   <div class="card-body">
+     <!--edit modal form-->
+            <form  (ngSubmit)="onassign(assign)" #assign="ngForm" enctype="multipart/form-data" method="post">
+              <div class="row">
+                <label  class="col-sm-9"></label>
+                  <div class="form-group col-sm-11">
+                    <label >Assign Permission For <strong>{{rolenew.name}}</strong></label>
+                    <!-- <div *ngFor = "let permission of permissions">
+                      <label>{{permission. name}}</label>
+                    </div> -->
+                          <select multiple class="form-control" #per="ngModel" id="permission" [(ngModel)]="rolepers.permission" name="permission" required>
+                              <!-- <option *ngIf="!roles" value="no">no</option> -->
+                         <option *ngFor="let permission of permissions" value="{{permission.id}}">{{permission.name}}</option>
+                           
+                       </select>
+                  </div>
+              <!-- <div class="form-group col-sm-5">
+                    <label for="name">Add role Pic</label>
+                        <input  class="form-control" type="file" name ="name" id="name" [(ngModel)]="name">
+  
+              </div> -->
+              </div>
+              
+                <button type="submit" class="btn btn-primary pull-left" (click)="assignModal.hide()" [disabled] ="!assign.valid">Update Info</button>
+            </form>
+                 <button class="btn btn-danger pull-right"  (click)="ondelete(); assignModal.hide()">Delete Role</button>
+        
+                   </div>
+            </div>
+        </div><!--/.col-->
+    
+      </div>
+      <div class="modal-footer">
+      </div>
+      </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+
+<!--<div bsModal #viewModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog modal-lg" role="document">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<h4 class="modal-title">View Permission</h4>-->
+                <!--<button type="button" class="close" (click)="viewModal.hide() " aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span>-->
+                <!--</button>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<div class="col-sm-12">-->
+                    <!--<div class="card">-->
+                        <!--<div class="card-header">-->
+                        <!--</div>-->
+                        <!--<div class="card-body">-->
+                            <!--&lt;!&ndash;edit modal form&ndash;&gt;-->
+                                <!--<div class="row">-->
+                                    <!--<label  class="col-sm-9"></label>-->
+                                    <!--<div class="form-group col-sm-11">-->
+                                        <!--<label >View Permission For <strong>{{rolenew.name}}</strong></label>-->
+                                        <!--&lt;!&ndash; <div *ngFor = "let permission of permissions">-->
+                                          <!--<label>{{permission. name}}</label>-->
+                                        <!--</div> &ndash;&gt;-->
+                                    <!--</div>-->
+                                    <!--&lt;!&ndash; <div class="form-group col-sm-5">-->
+                                          <!--<label for="name">Add role Pic</label>-->
+                                              <!--<input  class="form-control" type="file" name ="name" id="name" [(ngModel)]="name">-->
+
+                                    <!--</div> &ndash;&gt;-->
+                                <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>&lt;!&ndash;/.col&ndash;&gt;-->
+
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+
+
+      <!-- new role form  -->
+    <div bsModal #permissionModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-primary" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Add Permission</h4>
+              <button type="button" class="close" (click)="permissionModal.hide()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+        <div class="modal-body">
+           <div class="col-sm-12">
+    <!--Card in the modal-->
+             <div class="card">
+                 <div class="card-header">
+                    <strong>Permission</strong>
+                    <small>Registration FORM</small>
+                  </div>
+          <div class="card-body">
+    <!--Form in the modal-->
+         <form  (ngSubmit)="onSubmitPermission(f)" #f="ngForm" enctype="multipart/form-data" method="post">
+    
+            
+                 <div class="row">
+                      <label  class="col-sm-9"></label>
+                        <div class="form-group col-sm-11">
+                          <label >Permission Name</label>
+                          <input type="text" class="form-control"  #perName="ngModel" id="rolename" placeholder="Enter Permission Name" [(ngModel)]="pername" name="name" required>
+                        <div *ngIf="!perName.valid && perName.dirty">
+                            Permission Name Required!
+                        </div>
+                        </div>
+                    <!-- <div class="form-group col-sm-5">
+                          <label for="name">Add role Pic</label>
+                              <input  class="form-control" type="file" name ="name" id="name" [(ngModel)]="name">
+      
+                    </div> -->
+                    </div>
+                    <div class="row">
+                    <div class="form-control ">
+                      <button type="submit"  class="btn btn-primary  btn-sm pull-right" (click)="permissionModal.hide()"  [disabled] ="!f.valid">ADD</button>
+                    </div>
+                  </div>
+            <!--submit button-->
+    
+                  <!--<button type="submit" (click)="addFile()" class="btn btn-primary">Upload</button>-->
+         </form>
+    
+    
+                 </div>
+          </div>
+      </div><!--/.col-->
+    
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <div bsModal #editPerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Permission Edit</h4>
+              <button type="button" class="close" (click)="editPerModal.hide() " aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <div class="col-sm-12">
+                 <div class="card">
+                        <div class="card-header">
+                          <strong>Permissions</strong>
+                          <small>Edit FORM</small>
+                        </div>
+                   <div class="card-body">
+     <!--edit modal form-->
+            <form  (ngSubmit)="onupdatePer(edit)" #edit="ngForm" enctype="multipart/form-data" method="post">
+              <div class="row">
+                <label  class="col-sm-9"></label>
+                  <div class="form-group col-sm-11">
+                    <label >Permission Name</label>
+                    <input type="text" class="form-control"  #perNm="ngModel" id="permissionname" placeholder="Enter Permission Name" [(ngModel)]="pernew.name" name="name" required>
+                  <div *ngIf="!perNm.valid && perNm.dirty">
+                      Permission Name Required!
+                  </div>
+                  </div>
+              <!-- <div class="form-group col-sm-5">
+                    <label for="name">Add role Pic</label>
+                        <input  class="form-control" type="file" name ="name" id="name" [(ngModel)]="name">
+  
+              </div> -->
+              </div>
+              
+                <button type="submit" class="btn btn-primary pull-left" (click)="editPerModal.hide()" [disabled] ="!edit.valid">Update Info</button>
+            </form>
+                 <button class="btn btn-danger pull-right"  (click)="ondeletePer(); editPerModal.hide()">Delete Permission</button>
+        
+                   </div>
+            </div>
+        </div><!--/.col-->
+    
+      </div>
+      <div class="modal-footer">
+      </div>
+      </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->

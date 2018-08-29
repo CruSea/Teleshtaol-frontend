@@ -1,0 +1,224 @@
+<div class="animated fadein">
+<!-- Table content wrapper-->
+<!-- <div class="row"> -->
+<div class="col-md-12">
+
+<h1> List of articles</h1>
+<button type="button" class="btn btn-warning pull-right " data-toggle="modal" (click)="largeModal.show()">
+        Add Article
+      </button>
+<div>
+  
+      <!--<div class="form-group">-->
+        <!--<input class="form-control col-sm-6" [(ngModel)]="term" placeholder="Search contacts here..." type="text">-->
+      <!--</div>-->
+      <div class="row">
+    <div class="col-lg-11">
+    
+
+     <div  *ngFor="let article of this.article_list_paginator.data  let i = index ;">
+
+     <div class="card">
+     
+<div class="card-header"> <h4> {{i + article_list_paginator.from }} , {{article.title}}</h4> <code> {{article.category.name}}</code>  <small>created by: {{article.user.name}}</small>
+
+</div>
+<h4 class="card-title mb-0"></h4>
+<div class="small text-muted">{{article.created_at}}</div>
+<div class="card-body">
+
+    <div class="row text-center">
+
+      <br>
+       
+    {{article.body}} <br>
+
+   
+      
+    
+</div></div><div class="card-footer">
+      <span class="btn btn-info pull-left">    <a  data-toggle="modal" (click)="editModal.show(); onedit(article)"><i class="fa fa-edit"></i>&nbsp;Edit Article</a></span>
+    </div></div>
+
+    <br>
+    </div> </div> </div>
+      <!-- Contact List table-->
+      <!-- <table class="table table-striped table-hover table-condensed table-sm">
+        <thead>
+        <tr>
+          <th>No</th>
+          <th>Title</th>
+          <th>Article</th>
+          <th>created-on</th>
+          <th>updated-on</th>
+          <th>Category</th>
+          <th>Writer</th>
+          <th>image</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let article of this.article_list_paginator.data  let i = index ;">
+          
+          <td>{{i + article_list_paginator.from }}</td>
+          <td>{{article.title}} </td>
+          <td>{{article.body}}</td>
+          <td>{{article.created_at}}</td>
+          <td>{{article.updated_at}}</td>
+          <td>{{article.category_id}}</td>
+          <td>{{article.user_id}}</td>
+          <td>{{article.cover_image}}</td>
+          <td>
+            <span class="badge badge-success">    <a  data-toggle="modal" (click)="editModal.show(); onedit(article)"><i class="fa fa-edit"></i>&nbsp;Edit Info</a></span>
+
+          </td>
+        </tr>
+
+        </tbody>
+      </table> -->
+      <nav>
+      <!--
+       pagination works here!!!
+              -->
+        <ul class="pagination">
+          <li *ngIf="article_list_paginator.first_page_url"  class="page-item"><a  (click)="getPaginatedArticle(article_list_paginator.first_page_url)" class="btn-link" >First</a></li>
+          <li *ngIf="article_list_paginator.prev_page_url"  class="page-item"><a  (click)="getPaginatedArticle(article_list_paginator.prev_page_url)" class="btn-link" >Prev</a></li>
+          <li class="page-item active">
+            <a class="page-link" >{{article_list_paginator.current_page + '/' + article_list_paginator.last_page}}</a>
+          </li>
+
+
+          <li *ngIf="article_list_paginator.next_page_url"  class="page-item"><a  (click)="getPaginatedArticle(article_list_paginator.next_page_url)" class="page-link" >Next</a></li>
+          <li *ngIf="article_list_paginator.last_page_url"  class="page-item"><a  (click)="getPaginatedArticle(article_list_paginator.prev_page_url)" class="page-link" >Last</a></li>
+
+        </ul>
+      </nav>
+    </div>
+  
+
+<!--/.col-->
+</div>
+
+<div bsModal #largeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-primary" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Add Article</h4>
+      <button type="button" class="close" (click)="largeModal.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="col-sm-12">
+        <!--Card in the modal-->
+        <div class="card">
+          <div class="card-header">
+            <strong>Write Article</strong>
+
+          </div>
+          <div class="card-body">
+            <!--Form in the modal-->
+            <form  (ngSubmit)="onSubmit(f)" #f="ngForm" enctype="multipart/form-data" method="post">
+
+              <!--Full Name -->
+              <div class="row">
+                <!-- <label  class="col-sm-5"></label> -->
+                <div class="form-group col-sm-11">
+                  <label >Article</label>
+                  <label >title</label>
+                  <input type="text" class="form-control"  #art="ngModel" id="title" placeholder="Input title here" [(ngModel)]="title" name="title" required>
+                  <label >content</label>
+                  <textarea type="text" class="form-control"  #art="ngModel" id="body" placeholder="Input content here" [(ngModel)]="body" name="body" required></textarea>
+                  <label >Category</label>
+                
+                  <!-- <input type="number" class="form-control"  #art="ngModel" id="category" placeholder="Input category here" [(ngModel)]="category" name="category" required>  -->
+                  
+                      <select id="select" class="form-control"  #art="ngModel" id="category" placeholder="Input category here" [(ngModel)]="category" name="category" required>
+                        <option value="1">Addiction</option>
+                        <option value="2">Marrige</option>
+                        <option value="3">Health</option>
+                      </select>
+                    
+                  </div>
+                </div>
+              <button type="submit"  class="btn btn-warning  btn-lg pull-left" (click)="largeModal.hide()"  [disabled] ="!f.valid">POST</button>
+                
+              <!--</div>-->
+              <!--submit button-->
+
+              <!--<button type="submit" (click)="addFile()" class="btn btn-primary">Upload</button>-->
+            </form>
+
+
+          </div>
+        </div>
+      </div><!--/.col-->
+
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!--Edit modal-->
+<div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Article</h4>
+      <button type="button" class="close" (click)="editModal.hide() " aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <strong>Modify Article written by:</strong>
+
+          </div>
+          <div class="card-body">
+          
+            <!--edit modal form-->
+            <form  (ngSubmit)="onupdate(edit)" #edit="ngForm" enctype="multipart/form-data" method="post">
+              <!--Full Name -->
+              <div class="row">
+                <label  class="col-sm-7"></label>
+                <div class="form-group col-sm-11">
+                    <label for="vat">Title</label>
+                    <input type="text" class="form-control"  #art="ngModel" id="title" placeholder="title" [(ngModel)]="articlenew.title" name="title" required>
+                    <label for="vat">Content</label>
+                  <textarea id="textarea-input" type="text" class="form-control"  #art="ngModel" id="body" placeholder="write content" [(ngModel)]="articlenew.body" name="body" required></textarea>
+                  <label for="vat">Category</label>
+                  <!-- <input  class="form-control"  #art="ngModel" id="category"  [(ngModel)]="articlenew.category_id" name="category" required> -->
+
+                  <select  class="form-control"  #art="ngModel" id="category"  [(ngModel)]="articlenew.category_id" name="category" required>
+                      <option *ngFor="let cat of this.category_array.category let i = index;" value="{{cat.id}}">{{cat.name}}</option>
+                      <!-- <option value="2">Marrige</option>
+                      <option value="3">Health</option> -->
+                    </select>
+                  
+                </div>
+
+              </div>
+              <button type="submit" class="btn btn-success pull-left" (click)="editModal.hide()" [disabled] ="!edit.valid">Update</button>
+            </form>
+
+            <button class="btn btn-danger pull-left" margin="1px"  (click)="ondelete(article); editModal.hide()">Delete </button>
+            <!--<popup  #popup1>-->
+            <!--Add your own html elements here-->
+            <!--</popup>-->
+
+          </div>
+        </div>
+      </div><!--/.col-->
+
+    </div>
+    <div class="modal-footer">
+      <small>  press update to update the article or <a href="http://localhost:4200/#/components/article-write">Press here for more</a></small>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>

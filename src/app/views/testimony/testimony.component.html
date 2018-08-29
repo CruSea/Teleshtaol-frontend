@@ -3,9 +3,7 @@
   <!-- <div class="row"> -->
   <div class="col-md-12">
   
-  <h3> List of Testimonies by date</h3><br>
-  
-  
+  <h1> List of Testimonies by date</h1>
   <button type="button" class="btn btn-warning pull-right " data-toggle="modal" (click)="largeModal.show()">
           Add Testimony
         </button>
@@ -51,15 +49,15 @@
          pagination works here!!!
                 -->
           <ul class="pagination">
-            <li *ngIf="Testimony_list_paginator.first_page_url"  class="page-item"><a  (click)="getPaginatedTestimony(Testimony_list_paginator.first_page_url)" class="btn-link" >First</a></li>
-            <li *ngIf="Testimony_list_paginator.prev_page_url"  class="page-item"><a  (click)="getPaginatedTestimony(Testimony_list_paginator.prev_page_url)" class="btn-link" >Prev</a></li>
+            <li *ngIf="Testimony_list_paginator.first_page_url"  class="page-item"><a  (click)="getPaginatedArticle(Testimony_list_paginator.first_page_url)" class="btn-link" >First</a></li>
+            <li *ngIf="Testimony_list_paginator.prev_page_url"  class="page-item"><a  (click)="getPaginatedArticle(Testimony_list_paginator.prev_page_url)" class="btn-link" >Prev</a></li>
             <li class="page-item active">
               <a class="page-link" >{{Testimony_list_paginator.current_page + '/' + Testimony_list_paginator.last_page}}</a>
             </li>
   
   
-            <li *ngIf="Testimony_list_paginator.next_page_url"  class="page-item"><a  (click)="getPaginatedTestimony(Testimony_list_paginator.next_page_url)" class="page-link" >Next</a></li>
-            <li *ngIf="Testimony_list_paginator.last_page_url"  class="page-item"><a  (click)="v(Testimony_list_paginator.prev_page_url)" class="page-link" >Last</a></li>
+            <li *ngIf="Testimony_list_paginator.next_page_url"  class="page-item"><a  (click)="getPaginatedArticle(Testimony_list_paginator.next_page_url)" class="page-link" >Next</a></li>
+            <li *ngIf="Testimony_list_paginator.last_page_url"  class="page-item"><a  (click)="getPaginatedArticle(Testimony_list_paginator.prev_page_url)" class="page-link" >Last</a></li>
   
           </ul>
         </nav>

@@ -7,19 +7,23 @@ import {
   FullLayout,
   SimpleLayout
 } from './containers';
-// import {DashboardComponent} from "./views/dashboard/dashboard.component";
+import {DashboardComponent} from "./views/dashboard/dashboard.component";
 import {AppSidebar} from "./components/app-sidebar/app-sidebar.component";
-// import {TestimonyComponent} from "./views/testimony/testimony.component";
+import {TestimonyComponent} from "./views/testimony/testimony.component";
 import {LoginComponent} from "./views/login/login.component";
-import { AuthGuard } from './auth.guard';
-import { AdminGuard } from './admin.guard';
+import { RegisterComponent } from 'app/views/login/register/register.component';
 
 export const routes: Routes = [
 
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: 'auth/login',
     pathMatch: 'full',
+  },
+
+  {
+    path:'register',
+    component: RegisterComponent,
   },
   {
     path: '',
@@ -29,7 +33,7 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'login',
+        path: 'auth',
         loadChildren: './views/login/login.module#LoginModule'
       },
     ]
@@ -44,33 +48,32 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule',
-        // canActivate: [AuthGuard]
+        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       },
-
-    {
-      path: 'components',
-      loadChildren: 'app/views/components/components.module',
-    },
-    {
-      path: 'testimony',
-      loadChildren: 'app/views/testimony/testimony.module#TestimonyModule',
-      
-    },
-    
+      {
+        path: 'components',
+        loadChildren: './views/components/components.module#ComponentsModule'
+      },
+      {
+        path: 'testimony',
+        loadChildren: './views/testimony/testimony.module#TestimonyModule'
+      },
+     
     {
       path: 'roles',
-      loadChildren: 'app/views/role_and_permission/roles.module#RoleModule',
+      loadChildren: './views/role_and_permission/roles.module#RoleModule',
       // canActivate: [AdminGuard]
     }
   
-     
 
     ]
   },
 
-];
 
+
+
+
+];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
